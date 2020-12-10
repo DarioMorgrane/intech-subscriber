@@ -1,4 +1,4 @@
-package dariomorgrane.subscriber.models;
+package dariomorgrane.subscriber.model;
 
 import org.springframework.data.domain.Persistable;
 
