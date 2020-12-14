@@ -8,13 +8,7 @@ import java.util.List;
 
 public interface MessageRepository extends JpaRepository<Message, Long> {
 
-    @Query(value = "SELECT id FROM Purchase ORDER BY id DESC LIMIT 1;", nativeQuery = true)
-    Long getLastIdFromPurchase();
-
-    @Query(value = "SELECT id FROM Subscription ORDER BY id DESC LIMIT 1;", nativeQuery = true)
-    Long getLastIdFromSubscription();
-
-    @Query(value = "SELECT id FROM Purchase UNION SELECT id FROM Subscription;", nativeQuery = true)
-    List<Long> getAllIdsFromPurchaseAndSubscription();
+    @Query(value = "SELECT id FROM Purchase UNION ALL SELECT id FROM Subscription ORDER BY id DESC;", nativeQuery = true)
+    List<Long> getAllIdsSorted();
 
 }

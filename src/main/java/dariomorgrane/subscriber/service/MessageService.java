@@ -4,12 +4,9 @@ import dariomorgrane.subscriber.model.Message;
 
 public interface MessageService {
 
-    boolean checkReceivedIdIsValid(long id);
+    boolean checkIdIsValid(long id);
 
     void saveMessage(Message message);
 
-    Long getLastIdFromPurchase();
-
-    Long getLastIdFromSubscription();
-
+    Long getLastId();
 }

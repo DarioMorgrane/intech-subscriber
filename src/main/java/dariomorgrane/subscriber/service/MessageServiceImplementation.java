@@ -23,19 +23,14 @@ public class MessageServiceImplementation implements MessageService {
     }
 
     @Override
-    public boolean checkReceivedIdIsValid(long id) {
-        List<Long> allIds = messageRepository.getAllIdsFromPurchaseAndSubscription();
+    public boolean checkIdIsValid(long id) {
+        List<Long> allIds = messageRepository.getAllIdsSorted();
         return !allIds.contains(id);
     }
 
     @Override
-    public Long getLastIdFromPurchase() {
-        return messageRepository.getLastIdFromPurchase();
-    }
-
-    @Override
-    public Long getLastIdFromSubscription() {
-        return messageRepository.getLastIdFromSubscription();
+    public Long getLastId() {
+        return messageRepository.getAllIdsSorted().get(0);
     }
 
 }

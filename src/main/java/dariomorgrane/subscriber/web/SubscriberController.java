@@ -28,7 +28,7 @@ public class SubscriberController {
     @PostMapping
     public ResponseEntity<String> saveMessage(@RequestBody Message message) {
         long currentMessageId = message.getId();
-        if (service.checkReceivedIdIsValid(currentMessageId)) {
+        if (service.checkIdIsValid(currentMessageId)) {
             LOG.info("Received message mapped to object: " + message);
             service.saveMessage(message);
             return ResponseEntity.ok().build();
@@ -40,15 +40,7 @@ public class SubscriberController {
 
     @GetMapping
     public ResponseEntity<String> getLastId() {
-        Long lastIdFromPurchase = service.getLastIdFromPurchase();
-        if (lastIdFromPurchase == null) {
-            lastIdFromPurchase = 0L;
-        }
-        Long lastIdFromSubscription = service.getLastIdFromSubscription();
-        if (lastIdFromSubscription == null) {
-            lastIdFromSubscription = 0L;
-        }
-        long lastId = Math.max(lastIdFromPurchase, lastIdFromSubscription);
+        long lastId = service.getLastId();
         LOG.info("Last used ID was requested. Return: " + lastId);
         return ResponseEntity.ok().body(String.valueOf(lastId));
     }
